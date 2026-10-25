@@ -431,6 +431,7 @@ typedef struct {
   uint8_t esta_hi;
   uint8_t esta_lo;
   int bcast_limit; // the number of nodes after which we change to bcast
+  int filter_local; // drop packets from our own ip / loopback (default TRUE)
   artnet_node_report_code report_code;
 } node_state_t;
 
