@@ -221,6 +221,7 @@ EXTERN artnet_node artnet_new(const char *ip, int verbose);
 EXTERN int artnet_setoem(artnet_node vn, uint8_t hi, uint8_t lo);
 EXTERN int artnet_setesta(artnet_node vn, char hi, char lo);
 EXTERN int artnet_set_bcast_limit(artnet_node vn, int limit);
+EXTERN int artnet_set_loopback_filter(artnet_node vn, int enabled);
 EXTERN int artnet_start(artnet_node n);
 EXTERN int artnet_read(artnet_node n, int timeout);
 EXTERN int artnet_stop(artnet_node n);

@@ -99,6 +99,7 @@ artnet_node artnet_new(const char *ip, int verbose) {
   n->state.esta_hi = ESTA_HI;
   n->state.esta_lo = ESTA_LO;
   n->state.bcast_limit = 0;
+  n->state.filter_local = TRUE;
 
   n->peering.peer = NULL;
   n->peering.master = TRUE;
@@ -270,6 +271,22 @@ int artnet_set_bcast_limit(artnet_node vn, int limit) {
   }
 
   n->state.bcast_limit = limit;
+  return ARTNET_EOK;
+}
+
+/*
+ * Enable or disable the filter that drops packets sent from this host.
+ * By default a node ignores packets from its own ip address and from the
+ * loopback address, so two nodes on one machine never hear each other.
+ * Disable the filter to receive from another process on the same host.
+ * @param vn the artnet_node
+ * @param enabled TRUE (default) to drop local packets, FALSE to accept them
+ */
+int artnet_set_loopback_filter(artnet_node vn, int enabled) {
+  node n = (node) vn;
+  check_nullnode(vn);
+
+  n->state.filter_local = enabled ? TRUE : FALSE;
   return ARTNET_EOK;
 }
 
